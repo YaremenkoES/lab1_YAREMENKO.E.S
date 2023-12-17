@@ -4,11 +4,11 @@ from sklearn.cluster import KMeans
 from sklearn.datasets import make_blobs
 from sklearn.metrics import silhouette_score
 
-# Generate random data points as an example
+
 n_samples = 300
 X, _ = make_blobs(n_samples=n_samples, centers=4, cluster_std=1.0, random_state=42)
 
-# Step 1: Determine the number of clusters using the moving average method
+
 def moving_average(X, n):
     cumsum = np.cumsum(np.insert(X, 0, 0))
     return (cumsum[n:] - cumsum[:-n]) / float(n)
@@ -22,12 +22,12 @@ for n_clusters in range(2, 16):
 
 optimal_clusters = np.argmax(scores) + 2  # Adding 2 to account for the range
 
-# Step 2: Perform K-Means clustering with the optimal number of clusters
+
 kmeans_optimal = KMeans(n_clusters=optimal_clusters)
 kmeans_optimal.fit(X)
 cluster_centers = kmeans_optimal.cluster_centers_
 
-# Step 3: Plot the figures
+
 plt.figure(figsize=(15, 5))
 
 # Initial points
